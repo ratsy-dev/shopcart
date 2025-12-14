@@ -15,7 +15,15 @@ const ProductCards = ({ products, GridList }) => {
         <div className="col-lg-4 col-md-6 col-12" key={i}>
           <div className="product-item">
             <div className="product-thumb">
-              <div className="pro-thumb">
+              <div
+                style={{
+                  width: "100%",
+                  height: "250px",
+                  overflow: "hidden",
+                  borderRadius: "10px",
+                }}
+                className="pro-thumb"
+              >
                 <img src={`${product.img}`} alt={`${product.img}`} />
               </div>
               <div className="product-action-link">
@@ -58,7 +66,7 @@ const ProductCards = ({ products, GridList }) => {
               </div>
             </div>
             <div className="product-content">
-            <Link to={`/shop/${product.id}`}>{product.name}</Link>
+              <Link to={`/shop/${product.id}`}>{product.name}</Link>
               <p className="productRating">
                 <Rating />
               </p>

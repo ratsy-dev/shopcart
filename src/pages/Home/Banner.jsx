@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 
 const title = (
   <h2>
-    Search Your One From <span>Thousand</span> Of Products
+    Search From <span>Thousand</span> Of Products
   </h2>
 );
-const desc = "We Have The Largest Collection of products";
+const desc = "We have the largest collection of products";
 
 const bannerList = [
   {
@@ -48,8 +48,8 @@ const Banner = () => {
         <div className="banner-content">
           {title}
           <form>
-            <SelectCategory select={"all"} />
             <input
+              style={{ width: "100%" }}
               type="text"
               name="search"
               placeholder="Search your product"
@@ -62,11 +62,12 @@ const Banner = () => {
           </form>
           <p>{desc}</p>
           <ul className="lab-ul">
-          {searchInput && filteredProducts.map((product, i) => (
-              <li key={i}>
-               <Link to={`/shop/${product.id}`}> {product.name}</Link>
-              </li>
-            ))}
+            {searchInput &&
+              filteredProducts.map((product, i) => (
+                <li key={i}>
+                  <Link to={`/shop/${product.id}`}> {product.name}</Link>
+                </li>
+              ))}
           </ul>
         </div>
       </div>
