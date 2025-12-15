@@ -15,13 +15,13 @@ const categoryList = [
     imgUrl: "src/assets/images/category/02.jpg",
     imgAlt: "category rajibraj91 rajibraj",
     iconName: "icofont-brand-windows",
-    title: "Shoes",
+    title: "Men's Sneaker",
   },
   {
     imgUrl: "src/assets/images/category/03.jpg",
     imgAlt: "category rajibraj91 rajibraj",
     iconName: "icofont-brand-windows",
-    title: "Photography",
+    title: "Photography Equipment",
   },
   {
     imgUrl: "src/assets/images/category/04.jpg",
@@ -55,7 +55,10 @@ const HomeCategory = () => {
           <div className="row g-4 justify-content-center row-cols-md-3 row-cols-sm-2 row-cols-1">
             {categoryList.map((val, i) => (
               <div className="col" key={i}>
-                <Link to="/shop" className="category-item">
+                <Link
+                  to={`/shop?category=${val.title}`}
+                  className="category-item"
+                >
                   <div className="category-inner">
                     <div className="category-thumb">
                       <img src={`${val.imgUrl}`} alt={`${val.imgAlt}`} />
@@ -64,7 +67,7 @@ const HomeCategory = () => {
                       <div className="cate-icon">
                         <i className={`${val.iconName}`}></i>
                       </div>
-                      <Link to="/shop">
+                      <Link to={`/shop?category=${val.title}`}>
                         <h6>{val.title}</h6>
                       </Link>
                     </div>

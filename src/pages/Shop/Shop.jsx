@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PageHeader from "../../components/PageHeader";
 import { Component, Fragment, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Search from "./Search";
 import Pagination from "./Pagination";
 import ShopCategory from "./ShopCategory";
@@ -21,6 +22,10 @@ const Shop = () => {
   // Get current products to display
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12; // Number of products per page
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const selectedCategoryFromHome = queryParams.get("category");
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -45,6 +50,19 @@ const Shop = () => {
     setProducts(newItem);
     // console.log(selectedCategory)
   };
+
+  useEffect(() => {
+    if (selectedCategoryFromHome && selectedCategoryFromHome !== "All") {
+      const filtered = Data.filter(
+        (item) => item.category === selectedCategoryFromHome
+      );
+      setProducts(filtered);
+      setSelectedCategory(selectedCategoryFromHome);
+    } else {
+      setProducts(Data);
+      setSelectedCategory("All");
+    }
+  }, [selectedCategoryFromHome]);
 
   return (
     <div>
