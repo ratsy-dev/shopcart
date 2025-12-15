@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { toast } from "react-toastify";
+
 const subTitle = "Save The Day";
 const title = (
   <h2 className="title">
@@ -10,6 +13,31 @@ const regTitle = "Register Now";
 const btnText = "Register Now";
 
 const Register = () => {
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    number: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    toast.success("Successfully Registered! 🎉");
+    setFormData({
+      name: "",
+      email: "",
+      number: "",
+    });
+  };
+
   return (
     <section className="register-section padding-tb pb-0">
       <div className="container">
@@ -24,23 +52,29 @@ const Register = () => {
           <div className="col">
             <div className="section-wrapper">
               <h4>{regTitle}</h4>
-              <form className="register-form">
+              <form className="register-form" onSubmit={handleSubmit}>
                 <input
                   type="text"
                   name="name"
                   placeholder="Username"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="reg-input"
                 />
                 <input
                   type="email"
                   name="email"
                   placeholder="Email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="reg-input"
                 />
                 <input
                   type="text"
                   name="number"
                   placeholder="Phone"
+                  value={formData.number}
+                  onChange={handleChange}
                   className="reg-input"
                 />
                 <button type="submit" className="lab-btn">
