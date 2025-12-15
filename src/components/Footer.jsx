@@ -142,7 +142,7 @@ const Footer = () => {
                         {socialList.map((val, i) => (
                           <li key={i}>
                             <Link
-                              to={val.link}
+                              to="#"
                               onClick={() => {
                                 setTimeout(() => {
                                   window.scrollTo({

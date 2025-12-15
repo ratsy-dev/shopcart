@@ -29,8 +29,31 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // --- Basic Field Validation ---
+    if (!formData.name || !formData.email || !formData.number) {
+      toast.error("Please fill all fields 🙏");
+      return;
+    }
+
+    // --- Email validation ---
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email 📧");
+      return;
+    }
+
+    // --- Phone number validation ---
+    if (formData.number.length < 10) {
+      toast.error("Phone number must be at least 10 digits 📱");
+      return;
+    }
+
+    // If all validations pass
     setSubmitted(true);
     toast.success("Successfully Registered! 🎉");
+
+    // Clear form
     setFormData({
       name: "",
       email: "",
