@@ -5,6 +5,8 @@ import PageHeader from "../../components/PageHeader";
 import { useParams } from "react-router-dom";
 import blogList from "../../utilis/blogdata";
 import MostPopularPost from "../../components/Sidebar/MostPopularPost";
+import { Link } from "react-router-dom";
+
 const socialList = [
   {
     link: "#",
@@ -157,7 +159,7 @@ const SingleBlog = () => {
                                     alt="video"
                                   />
                                   <a
-                                    href="https://youtu.be/2qWo6W5Wn8Q"
+                                    href="https://www.youtube.com/watch?v=hDPohqDgZB4"
                                     className="video-button popup"
                                     target="_blank"
                                   >
@@ -183,7 +185,7 @@ const SingleBlog = () => {
                                 <div className="tags-section">
                                   <ul className="tags lab-ul">
                                     <li>
-                                      <a href="#">Agency</a>
+                                      <a href="#">Shopping</a>
                                     </li>
                                     <li>
                                       <a href="#">Business</a>
@@ -195,12 +197,19 @@ const SingleBlog = () => {
                                   <ul className="lab-ul social-icons">
                                     {socialList.map((val, i) => (
                                       <li key={i}>
-                                        <a
-                                          href={val.link}
-                                          className={val.className}
+                                        <Link
+                                          to="#"
+                                          onClick={() => {
+                                            setTimeout(() => {
+                                              window.scrollTo({
+                                                top: 0,
+                                                behavior: "smooth",
+                                              });
+                                            }, 5);
+                                          }}
                                         >
                                           <i className={val.iconName}></i>
-                                        </a>
+                                        </Link>
                                       </li>
                                     ))}
                                   </ul>
@@ -208,28 +217,6 @@ const SingleBlog = () => {
                               </div>
                             </div>
                           ))}
-                        </div>
-                      </div>
-
-                      <div className="navigations-part">
-                        <div className="left">
-                          <a href="#" className="prev">
-                            <i className="icofont-double-left"></i>Previous
-                            Article
-                          </a>
-                          <a href="#" className="title">
-                            Evisculate Parallel Processes via Technica Sound
-                            Models Authoritative
-                          </a>
-                        </div>
-                        <div className="right">
-                          <a href="#" className="prev">
-                            Next Article<i className="icofont-double-right"></i>
-                          </a>
-                          <a href="#" className="title">
-                            Qvisculate Parallel Processes via Technica Sound
-                            Models Authoritative
-                          </a>
                         </div>
                       </div>
                     </div>
