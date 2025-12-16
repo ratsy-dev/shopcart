@@ -1,83 +1,84 @@
-import React from 'react'
-import PageHeader from '../../components/PageHeader';
-const subTitle = "About Our Brand";
-const title = "Good Qualification Services And Better Expriences";
-const desc = "Distinctively provide acces mutfuncto users whereas transparent proceses somes ncentivize eficient functionalities rather than extensible archtectur communicate leveraged services and cross-platform.";
+import React from "react";
+import PageHeader from "../../components/PageHeader";
+const subTitle = "About ShopCart";
+const title = "Your Trusted Destination for Quality Shopping";
+const desc =
+  "At ShopCart, we bring you a seamless, secure, and enjoyable online shopping experience. From trendy fashion and durable gadgets to everyday essentials — we deliver products you love with unbeatable service.";
 
-const year = "30+";
-const expareance = "Years Of Experiences";
+const year = "10+";
+const experience = "Years Of Experiences";
 
 const aboutList = [
-    {
-        imgUrl: '/src/assets/images/about/icon/01.jpg',
-        imgAlt: 'about icon rajibraj91 rajibraj',
-        title: 'Skilled Instructors',
-        desc: 'Distinctively provide acces mutfuncto users whereas communicate leveraged services',
-    },
-    {
-        imgUrl: '/src/assets/images/about/icon/02.jpg',
-        imgAlt: 'about icon rajibraj91 rajibraj',
-        title: 'Get Certificate',
-        desc: 'Distinctively provide acces mutfuncto users whereas communicate leveraged services',
-    },
-    {
-        imgUrl: '/src/assets/images/about/icon/03.jpg',
-        imgAlt: 'about icon rajibraj91 rajibraj',
-        title: 'Online Classes',
-        desc: 'Distinctively provide acces mutfuncto users whereas communicate leveraged services',
-    },
-]
+  {
+    imgUrl: "/src/assets/images/about/icon/01.jpg",
+    imgAlt: "Fast Delivery Icon",
+    title: "Fast & Reliable Delivery",
+    desc: "We ensure quick and safe delivery to your doorstep with real-time tracking.",
+  },
+  {
+    imgUrl: "/src/assets/images/about/icon/02.jpg",
+    imgAlt: "Secure Payment Icon",
+    title: "Secure Payments",
+    desc: "Your transactions are protected with advanced security and encrypted gateways.",
+  },
+  {
+    imgUrl: "/src/assets/images/about/icon/03.jpg",
+    imgAlt: "Customer Support Icon",
+    title: "24/7 Customer Support",
+    desc: "Our dedicated support team is always ready to help you with queries and concerns.",
+  },
+];
 
 const About = () => {
   return (
     <div>
-        <PageHeader title={'About Our Brand'} curPage={'About'} />
-        <div className="about-section style-3 padding-tb section-bg">
-                <div className="container">
-                    <div className="row justify-content-center row-cols-xl-2 row-cols-1 align-items-center">
-                        <div className="col">
-                            <div className="about-left">
-                                <div className="about-thumb">
-                                    <img src="/src/assets/images/about/01.jpg" alt="about" />
-                                </div>
-                                <div className="abs-thumb">
-                                    <img src="/src/assets/images/about/02.jpg" alt="about" />
-                                </div>
-                                <div className="about-left-content">
-                                    <h3>{year}</h3>
-                                    <p>{expareance}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <div className="about-right">
-                                <div className="section-header">
-                                    <span className="subtitle">{subTitle}</span>
-                                    <h2 className="title">{title}</h2>
-                                    <p>{desc}</p>
-                                </div>
-                                <div className="section-wrapper">
-                                    <ul className="lab-ul">
-                                        {aboutList.map((val, i) => (
-                                            <li key={i}>
-                                                <div className="sr-left">
-                                                    <img src={`${val.imgUrl}`} alt={`${val.imgAlt}`} />
-                                                </div>
-                                                <div className="sr-right">
-                                                    <h5>{val.title}</h5>
-                                                    <p>{val.desc}</p>
-                                                </div>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <PageHeader title={"About Our Brand"} curPage={"About"} />
+      <div className="about-section style-3 padding-tb section-bg">
+        <div className="container">
+          <div className="row justify-content-center row-cols-xl-2 row-cols-1 align-items-center">
+            <div className="col">
+              <div className="about-left">
+                <div className="about-thumb">
+                  <img src="/src/assets/images/about/01.jpg" alt="about" />
                 </div>
+                <div className="abs-thumb">
+                  <img src="/src/assets/images/about/02.jpg" alt="about" />
+                </div>
+                <div className="about-left-content">
+                  <h3>{year}</h3>
+                  <p>{experience}</p>
+                </div>
+              </div>
             </div>
+            <div className="col">
+              <div className="about-right">
+                <div className="section-header">
+                  <span className="subtitle">{subTitle}</span>
+                  <h2 className="title">{title}</h2>
+                  <p>{desc}</p>
+                </div>
+                <div className="section-wrapper">
+                  <ul className="lab-ul">
+                    {aboutList.map((val, i) => (
+                      <li key={i}>
+                        <div className="sr-left">
+                          <img src={`${val.imgUrl}`} alt={`${val.imgAlt}`} />
+                        </div>
+                        <div className="sr-right">
+                          <h5>{val.title}</h5>
+                          <p>{val.desc}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;
