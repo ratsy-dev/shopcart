@@ -36,15 +36,10 @@ const socialList = [
 const SingleBlog = () => {
   const [blog, setBlog] = useState(blogList);
   const { id } = useParams();
-  console.log(Number(id));
   const result = blog.filter((p) => p.id === Number(id));
-  console.log(result[0]);
   return (
     <div>
-      <PageHeader
-        title={"Single Blog Pages"}
-        curPage={"Blog / Blog Details"}
-      />
+      <PageHeader title={"Single Blog Pages"} curPage={"Blog / Blog Details"} />
       <div className="blog-section blog-single padding-tb section-bg">
         <div className="container">
           <div className="row justify-content-center">
@@ -65,9 +60,7 @@ const SingleBlog = () => {
                                 />
                               </div>
                               <div className="post-content">
-                                <h2>
-                                  {item.title}
-                                </h2>
+                                <h2>{item.title}</h2>
                                 <div className="meta-post">
                                   <ul className="lab-ul">
                                     <li>
@@ -247,7 +240,7 @@ const SingleBlog = () => {
             <div className="col-lg-4 col-12">
               <aside>
                 <Tags />
-                <MostPopularPost/>
+                <MostPopularPost />
               </aside>
             </div>
           </div>

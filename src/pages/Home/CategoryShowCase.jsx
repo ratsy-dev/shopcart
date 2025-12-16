@@ -104,8 +104,6 @@ const CategoryShowCase = () => {
     setItems(filtered);
   };
 
-  console.log(items);
-
   return (
     <div className="course-section style-3 padding-tb">
       <div className="course-shape one">

@@ -30,8 +30,6 @@ const NavItems = () => {
     }
   });
 
-  console.log(user, "user");
-
   return (
     <header
       className={`header-section style-4 ${
@@ -103,7 +101,13 @@ const NavItems = () => {
                   <div>
                     {user?.photoURL ? (
                       <>
-                        <img src={user?.photoURL} className="nav-profile" />
+                        <img
+                          src={user?.photoURL}
+                          alt="Profile"
+                          className="nav-profile"
+                          style={{ objectFit: "cover" }}
+                          referrerPolicy="no-referrer"
+                        />
                       </>
                     ) : (
                       <img
