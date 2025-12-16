@@ -7,34 +7,6 @@ const title = "Login";
 // const socialTitle = "Login With Social Media";
 const btnText = "Submit Now";
 
-const socialList = [
-  {
-    link: "#",
-    iconName: "icofont-github",
-    className: "github",
-  },
-  {
-    link: "#",
-    iconName: "icofont-facebook",
-    className: "facebook",
-  },
-  {
-    link: "#",
-    iconName: "icofont-twitter",
-    className: "twitter",
-  },
-  {
-    link: "#",
-    iconName: "icofont-linkedin",
-    className: "linkedin",
-  },
-  {
-    link: "#",
-    iconName: "icofont-instagram",
-    className: "instagram",
-  },
-];
-
 const Login = () => {
   // const [errorMessage, setErrorMessage] = useState("");
   const { signUpWithGmail, login } = useContext(AuthContext);

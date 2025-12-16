@@ -47,7 +47,7 @@ const NavItems = () => {
       >
         <div className="container">
           <div className="header-top-area">
-            <Link to="/signup" className="lab-btn me-3">
+            <Link to="/sign-up" className="lab-btn me-3">
               <span>Create Account</span>
             </Link>
             <Link className="fw-bold" to="/login">

@@ -1,41 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
+import { toast } from "react-toastify";
 
 const title = "Register Now";
-const socialTitle = "Register With Social Media";
 const btnText = "Get Started Now";
 
-let socialList = [
-  {
-    link: "#",
-    iconName: "icofont-facebook",
-    className: "facebook",
-  },
-  {
-    link: "#",
-    iconName: "icofont-twitter",
-    className: "twitter",
-  },
-  {
-    link: "#",
-    iconName: "icofont-linkedin",
-    className: "linkedin",
-  },
-  {
-    link: "#",
-    iconName: "icofont-instagram",
-    className: "instagram",
-  },
-  {
-    link: "#",
-    iconName: "icofont-pinterest",
-    className: "pinterest",
-  },
-];
-
 const Signup = () => {
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
   const { signUpWithGmail, createUser } = useContext(AuthContext);
 
@@ -57,31 +29,62 @@ const Signup = () => {
   // login with email password
   const handleSignup = (event) => {
     event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    const confirmPassword = form.confirmPassword.value; // Get the confirm password field
+
+    const name = event.target.name.value.trim();
+    const email = event.target.email.value.trim();
+    const password = event.target.password.value.trim();
+    const confirmPassword = event.target.confirmPassword.value.trim();
+
+    if (!name || !email || !password || !confirmPassword) {
+      toast.error("Please fill all the fields ❌");
+      event.target.reset();
+      return;
+    }
+
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      toast.error("Enter a valid email address 📧");
+      event.target.reset();
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters 🔐");
+      event.target.reset();
+      return;
+    }
 
     if (password !== confirmPassword) {
-      // Passwords do not match, set an error message
-      setErrorMessage("Passwords doesn't match! Please provide correct password");
-    } else {
-      // Passwords match, proceed with signup logic
-      setErrorMessage(""); // Clear the error message
-      createUser(email, password)
-        .then((userCredential) => {
-          // Signed in successfully
-          const user = userCredential.user;
-          alert("Account Created Successfully!")
-          navigate(from, { replace: true });
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorMessage);
-          alert(`${errorMessage}`)
-        });
+      toast.error("Passwords do not match ❌");
+      event.target.reset();
+      return;
     }
+
+    // -------------------------
+    // FIREBASE SIGNUP
+    // -------------------------
+    createUser(email, password)
+      .then((userCredential) => {
+        toast.success("Account Created Successfully 🎉");
+
+        event.target.reset(); // Clear form fields
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        const err = error.code;
+        console.log("Signup Error:", err);
+
+        if (err === "auth/email-already-in-use") {
+          toast.error("Email already registered. Try logging in.");
+        } else if (err === "auth/invalid-email") {
+          toast.error("Invalid email format ❌");
+        } else if (err === "auth/weak-password") {
+          toast.error("Password too weak ⚠️");
+        } else {
+          toast.error("Signup failed. Try again ❌");
+        }
+        event.target.reset();
+      });
   };
   return (
     <div>
@@ -106,14 +109,7 @@ const Signup = () => {
                   placeholder="Confirm Password"
                 />
               </div>
-              {/* showing error message */}
-              <div>
-                {errorMessage && (
-                  <div className="error-message text-danger">
-                    {errorMessage}
-                  </div>
-                )}
-              </div>
+
               <div className="form-group">
                 <button className="lab-btn">
                   <span>{btnText}</span>
@@ -128,34 +124,28 @@ const Signup = () => {
                 <span>or</span>
               </span>
 
-              <h5 className="subtitle">{socialTitle}</h5>
-              <ul className="lab-ul social-icons justify-content-center">
-                <li>
-                  <button onClick={handleRegister} className="github">
-                    <i className="icofont-github"></i>
-                  </button>
-                </li>
-                <li>
-                  <a href="/" className="facebook">
-                    <i className="icofont-facebook"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="/" className="twitter">
-                    <i className="icofont-twitter"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="/" className="linkedin">
-                    <i className="icofont-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="/" className="instagram">
-                    <i className="icofont-instagram"></i>
-                  </a>
-                </li>
-              </ul>
+              {/* <h5 className="subtitle">{socialTitle}</h5> */}
+              <button
+                onClick={handleRegister}
+                className="lab-btn"
+                style={{
+                  background: "#fff",
+                  color: "#000",
+                  border: "1px solid #ddd",
+                  padding: "10px 20px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  borderRadius: "5px",
+                }}
+              >
+                <img
+                  src="https://developers.google.com/identity/images/g-logo.png"
+                  alt="Google"
+                  style={{ width: "20px" }}
+                />
+                Continue with Google
+              </button>
             </div>
           </div>
         </div>

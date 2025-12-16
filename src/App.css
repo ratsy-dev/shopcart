@@ -32,3 +32,18 @@
   background: #0f9d58;
   color: #fff;
 }
+
+/* Mobile only adjustment (screens < 768px) */
+@media (max-width: 767px) {
+  .login-section,
+  .register-section {
+    padding-top: 140px !important; /* adjust value if needed */
+  }
+}
+/* Mobile only adjustment (screens < 768px) */
+@media (max-width: 767px) {
+  .login-section,
+  .register-section {
+    padding-top: 140px !important; /* adjust value if needed */
+  }
+}
