@@ -10,22 +10,25 @@ const conSubTitle = "Get in touch with Contact us";
 const conTitle =
   "Fill out the form below so we can understand your needs and assist you better.";
 const btnText = "Send our Message";
+import img1 from "../../assets/images/icon/01.png";
+import img2 from "../../assets/images/icon/02.png";
+import img3 from "../../assets/images/icon/03.png";
 
 const contactList = [
   {
-    imgUrl: "/src/assets/images/icon/01.png",
+    imgUrl: img1,
     imgAlt: "contact icon",
     title: "Office Address",
     desc: "1201 park street, Fifth Avenue",
   },
   {
-    imgUrl: "/src/assets/images/icon/02.png",
+    imgUrl: img2,
     imgAlt: "contact icon",
     title: "Phone number",
     desc: "+22698 745 632",
   },
   {
-    imgUrl: "/src/assets/images/icon/03.png",
+    imgUrl: img3,
     imgAlt: "contact icon",
     title: "Send email",
     desc: "admin@shopcart.com",

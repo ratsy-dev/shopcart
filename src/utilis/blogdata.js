@@ -1,7 +1,17 @@
+import img01 from "../assets/images/blog/01.jpg";
+import img02 from "../assets/images/blog/02.jpg";
+import img03 from "../assets/images/blog/03.jpg";
+import img04 from "../assets/images/blog/04.jpg";
+import img05 from "../assets/images/blog/05.jpg";
+import img06 from "../assets/images/blog/06.jpg";
+import img07 from "../assets/images/blog/07.jpg";
+import img08 from "../assets/images/blog/08.jpg";
+import img09 from "../assets/images/blog/09.jpg";
+
 const blogList = [
   {
     id: 1,
-    imgUrl: "/src/assets/images/blog/01.jpg",
+    imgUrl: img01,
     imgAlt: "Shopping Blog",
     title: "Top 10 Must-Have Gadgets for Smart Shopping in 2025",
     desc: "Discover the latest trending gadgets that can make your daily life easier. From smart trackers to portable tech, here's what shoppers are loving this year.",
@@ -14,7 +24,7 @@ const blogList = [
   },
   {
     id: 2,
-    imgUrl: "/src/assets/images/blog/02.jpg",
+    imgUrl: img02,
     imgAlt: "Shopping Blog",
     title: "How to Choose the Perfect Shoes for Everyday Comfort",
     desc: "Confused about picking the right pair of shoes? Learn how to select footwear that matches your style, supports your feet, and fits your budget.",
@@ -27,7 +37,7 @@ const blogList = [
   },
   {
     id: 3,
-    imgUrl: "/src/assets/images/blog/03.jpg",
+    imgUrl: img03,
     imgAlt: "Shopping Blog",
     title: "5 Home Decor Trends That Will Transform Your Space",
     desc: "From minimalistic designs to bold accents, explore the hottest home decor ideas that will help you create a stylish and cozy home environment.",
@@ -40,7 +50,7 @@ const blogList = [
   },
   {
     id: 4,
-    imgUrl: "/src/assets/images/blog/04.jpg",
+    imgUrl: img04,
     imgAlt: "Shopping Blog",
     title: "Beginner’s Guide to DSLR Cameras — What You Should Know",
     desc: "Thinking about starting photography? This guide explains sensor types, lens choices, and essential features to help you pick the right DSLR.",
@@ -53,7 +63,7 @@ const blogList = [
   },
   {
     id: 5,
-    imgUrl: "/src/assets/images/blog/05.jpg",
+    imgUrl: img05,
     imgAlt: "Shopping Blog",
     title: "How to Spot High-Quality Bags While Shopping Online",
     desc: "Learn the key things to check — stitching, material, zippers, and brand trust. Avoid low-quality bags with these simple tips.",
@@ -66,7 +76,7 @@ const blogList = [
   },
   {
     id: 6,
-    imgUrl: "/src/assets/images/blog/06.jpg",
+    imgUrl: img06,
     imgAlt: "Shopping Blog",
     title: "Photography Accessories Every Beginner Should Own",
     desc: "From tripods to lighting kits, here are affordable photography essentials that can instantly improve your photos.",
@@ -79,7 +89,7 @@ const blogList = [
   },
   {
     id: 7,
-    imgUrl: "/src/assets/images/blog/07.jpg",
+    imgUrl: img07,
     imgAlt: "Shopping Blog",
     title: "Why Minimalist Fashion Is Taking Over 2025",
     desc: "Clean lines, neutral colors, and timeless pieces — explore why minimalist fashion is trending and how you can adopt the style.",
@@ -92,7 +102,7 @@ const blogList = [
   },
   {
     id: 8,
-    imgUrl: "/src/assets/images/blog/08.jpg",
+    imgUrl: img08,
     imgAlt: "Shopping Blog",
     title: "The Smart Shopper’s Guide to Saving Money Online",
     desc: "Did you know you can save more by comparing deals, using flash offers, and checking reviews? Here’s how to shop smarter.",
@@ -105,7 +115,7 @@ const blogList = [
   },
   {
     id: 9,
-    imgUrl: "/src/assets/images/blog/09.jpg",
+    imgUrl: img09,
     imgAlt: "Shopping Blog",
     title: "A Complete Guide to Organizing Your Wardrobe Efficiently",
     desc: "Struggling with clutter? Learn easy methods to sort, store, and maintain your wardrobe like a pro.",

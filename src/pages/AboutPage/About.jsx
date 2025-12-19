@@ -1,5 +1,11 @@
 import React from "react";
 import PageHeader from "../../components/PageHeader";
+import img1 from "../../assets/images/about/icon/01.jpg";
+import img2 from "../../assets/images/about/icon/02.jpg";
+import img3 from "../../assets/images/about/icon/03.jpg";
+import img4 from "../../assets/images/about/01.jpg";
+import img5 from "../../assets/images/about/02.jpg";
+
 const subTitle = "About ShopCart";
 const title = "Your Trusted Destination for Quality Shopping";
 const desc =
@@ -10,19 +16,19 @@ const experience = "Years Of Experiences";
 
 const aboutList = [
   {
-    imgUrl: "/src/assets/images/about/icon/01.jpg",
+    imgUrl: img1,
     imgAlt: "Fast Delivery Icon",
     title: "Fast & Reliable Delivery",
     desc: "We ensure quick and safe delivery to your doorstep with real-time tracking.",
   },
   {
-    imgUrl: "/src/assets/images/about/icon/02.jpg",
+    imgUrl: img2,
     imgAlt: "Secure Payment Icon",
     title: "Secure Payments",
     desc: "Your transactions are protected with advanced security and encrypted gateways.",
   },
   {
-    imgUrl: "/src/assets/images/about/icon/03.jpg",
+    imgUrl: img3,
     imgAlt: "Customer Support Icon",
     title: "24/7 Customer Support",
     desc: "Our dedicated support team is always ready to help you with queries and concerns.",
@@ -39,10 +45,10 @@ const About = () => {
             <div className="col">
               <div className="about-left">
                 <div className="about-thumb">
-                  <img src="/src/assets/images/about/01.jpg" alt="about" />
+                  <img src={img4} alt="about" />
                 </div>
                 <div className="abs-thumb">
-                  <img src="/src/assets/images/about/02.jpg" alt="about" />
+                  <img src={img5} alt="about" />
                 </div>
                 <div className="about-left-content">
                   <h3>{year}</h3>

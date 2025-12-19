@@ -1,32 +1,36 @@
 import React from "react";
+import img1 from "../../assets/images/blog/10.jpg";
+import img2 from "../../assets/images/blog/11.jpg";
+import img3 from "../../assets/images/blog/12.jpg";
+import img4 from "../../assets/images/blog/09.jpg";
 
 const title = "Most Popular Posts";
 
 const postList = [
   {
     id: "blog-1",
-    imgUrl: "/src/assets/images/blog/10.jpg",
+    imgUrl: img1,
     imgAlt: "Shopping Tips",
     title: "Top 10 Money-Saving Hacks for Online Shopping",
     date: "Jan 12, 2025",
   },
   {
     id: "blog-2",
-    imgUrl: "/src/assets/images/blog/11.jpg",
+    imgUrl: img2,
     imgAlt: "Gadgets Review",
     title: "5 Must-Have Gadgets Under ₹1999 in 2025",
     date: "Jan 10, 2025",
   },
   {
     id: "blog-3",
-    imgUrl: "/src/assets/images/blog/12.jpg",
+    imgUrl: img3,
     imgAlt: "Fashion Trends",
     title: "Latest Fashion Trends You Shouldn’t Miss",
     date: "Jan 08, 2025",
   },
   {
     id: "blog-4",
-    imgUrl: "/src/assets/images/blog/09.jpg",
+    imgUrl: img4,
     imgAlt: "Shopping Guide",
     title: "Beginner’s Guide to Choosing Quality Products Online",
     date: "Jan 05, 2025",

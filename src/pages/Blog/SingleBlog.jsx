@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import blogList from "../../utilis/blogdata";
 import MostPopularPost from "../../components/Sidebar/MostPopularPost";
 import { Link } from "react-router-dom";
+import img1 from "../../assets/images/blog/single/01.jpg";
+import img2 from "../../assets/images/blog/single/02.jpg";
 
 const socialList = [
   {
@@ -131,10 +133,7 @@ const SingleBlog = () => {
                                   yet feel that never was greater artst
                                 </p>
 
-                                <img
-                                  src="/src/assets/images/blog/single/01.jpg"
-                                  alt="rajibraj91"
-                                />
+                                <img src={img1} alt="rajibraj91" />
 
                                 <p>
                                   Serenity hasir taken poseson mying entre soung
@@ -154,10 +153,7 @@ const SingleBlog = () => {
                                 </p>
 
                                 <div className="video-thumb">
-                                  <img
-                                    src="/src/assets/images/blog/single/02.jpg"
-                                    alt="video"
-                                  />
+                                  <img src={img2} alt="video" />
                                   <a
                                     href="https://www.youtube.com/watch?v=hDPohqDgZB4"
                                     className="video-button popup"
