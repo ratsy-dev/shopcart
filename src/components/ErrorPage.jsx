@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 const title = "Error 404!";
 const desc = "Oops! The Page You Are Looking For Could Not Be Found";
 const btnText = "Go Back To Home";
-import img1 from "../../assets/images/logo/logo.png";
-import img2 from "../../assets/images/404.png";
+import img1 from "../assets/images/logo/logo.png";
+import img2 from "../assets/images/404.png";
 
 const ErrorPage = () => {
   return (
