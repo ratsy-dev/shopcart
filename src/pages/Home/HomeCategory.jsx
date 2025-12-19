@@ -3,40 +3,46 @@ import { Link } from "react-router-dom";
 const subTitle = "Choose Any Products";
 const title = "Shop Everything With Us";
 const btnText = "Get Started Now";
+import img1 from "src/assets/images/category/01.jpg";
+import img2 from "src/assets/images/category/02.jpg";
+import img3 from "src/assets/images/category/03.jpg";
+import img4 from "src/assets/images/category/04.jpg";
+import img5 from "src/assets/images/category/05.jpg";
+import img6 from "src/assets/images/category/06.jpg";
 
 const categoryList = [
   {
-    imgUrl: "src/assets/images/category/01.jpg",
+    imgUrl: img1,
     imgAlt: "category rajibraj91 rajibraj",
     iconName: "icofont-brand-windows",
     title: "DSLR Camera",
   },
   {
-    imgUrl: "src/assets/images/category/02.jpg",
+    imgUrl: img2,
     imgAlt: "category rajibraj91 rajibraj",
     iconName: "icofont-brand-windows",
     title: "Men's Sneaker",
   },
   {
-    imgUrl: "src/assets/images/category/03.jpg",
+    imgUrl: img3,
     imgAlt: "category rajibraj91 rajibraj",
     iconName: "icofont-brand-windows",
     title: "Photography Equipment",
   },
   {
-    imgUrl: "src/assets/images/category/04.jpg",
+    imgUrl: img4,
     imgAlt: "category rajibraj91 rajibraj",
     iconName: "icofont-brand-windows",
     title: "Formal Dress",
   },
   {
-    imgUrl: "src/assets/images/category/05.jpg",
+    imgUrl: img5,
     imgAlt: "category rajibraj91 rajibraj",
     iconName: "icofont-brand-windows",
     title: "Colorful Bags",
   },
   {
-    imgUrl: "src/assets/images/category/06.jpg",
+    imgUrl: img6,
     imgAlt: "category rajibraj91 rajibraj",
     iconName: "icofont-brand-windows",
     title: "Home Decor",
