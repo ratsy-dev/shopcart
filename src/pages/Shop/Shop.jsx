@@ -8,7 +8,6 @@ import ShopCategory from "./ShopCategory";
 import PopularPost from "./PopularPost";
 import Tags from "./Tags";
 import ProductCards from "./ProductCards";
-const showResult = "Showing 01 - 12 of 139 Results";
 import Data from "/src/products.json";
 
 const Shop = () => {
@@ -34,6 +33,10 @@ const Shop = () => {
     indexOfLastProduct
   );
 
+  const start = indexOfFirstProduct + 1;
+  const end = Math.min(indexOfLastProduct, products.length);
+  const showResult = `Showing ${start} - ${end} of ${products.length} Results`;
+
   // Function to change the current page
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -43,6 +46,11 @@ const Shop = () => {
   const menuItems = [...new Set(Data.map((Val) => Val.category))];
 
   const filterItem = (curcat) => {
+    if (curcat === "All") {
+      setProducts(Data);
+      setSelectedCategory("All");
+      return;
+    }
     const newItem = Data.filter((newVal) => {
       return newVal.category === curcat;
     });
@@ -113,6 +121,7 @@ const Shop = () => {
                   menuItems={menuItems}
                   setProducts={setProducts}
                   selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
                 />
                 <PopularPost />
                 <Tags />
