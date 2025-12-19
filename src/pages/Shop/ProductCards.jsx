@@ -30,12 +30,12 @@ const ProductCards = ({ products, GridList }) => {
                 <Link to={`/shop/${product.id}`}>
                   <i className="icofont-eye"></i>
                 </Link>
-                <a href="#">
+                {/* <a href="#">
                   <i className="icofont-heart"></i>
-                </a>
-                <Link to="/cart-page">
+                </a> */}
+                {/* <Link to="/cart-page">
                   <i className="icofont-cart-alt"></i>
-                </Link>
+                </Link> */}
               </div>
             </div>
             <div className="product-content">

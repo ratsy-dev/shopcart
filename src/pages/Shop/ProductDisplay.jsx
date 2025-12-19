@@ -1,15 +1,19 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const desc =
   "Energistia an deliver atactica metrcs after avsionary Apropria trnsition enterpris an sources applications emerging 	psd template.";
 
 const ProductDisplay = ({ item }) => {
   const { id, img, price, name, quantity, seller } = item;
-  const [prequantity, setQuantity] = useState(quantity);
+  const [prequantity, setQuantity] = useState(1);
   const [coupon, setCoupon] = useState("");
   const [size, setSize] = useState("Select Size");
   const [color, setColor] = useState("Select Color");
+
+  const navigate = useNavigate();
+
+  const reviews = JSON.parse(localStorage.getItem("reviews")) || {};
 
   const handleDecrease = () => {
     if (prequantity > 1) {
@@ -37,7 +41,7 @@ const ProductDisplay = ({ item }) => {
       id: id,
       img: img,
       name: name,
-      price: price, 
+      price: price,
       quantity: prequantity,
       size: size,
       color: color,
@@ -48,7 +52,9 @@ const ProductDisplay = ({ item }) => {
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
 
     // Check if the product with the same ID is already in the cart
-    const existingProductIndex = existingCart.findIndex((item) => item.id === id);
+    const existingProductIndex = existingCart.findIndex(
+      (item) => item.id === id
+    );
 
     if (existingProductIndex !== -1) {
       // Product already in the cart; update quantity
@@ -65,9 +71,10 @@ const ProductDisplay = ({ item }) => {
     setQuantity(1);
     setSize("Select Size");
     setColor("Select Color");
+    localStorage.setItem("coupon", coupon);
     setCoupon("");
 
-    // You can add further logic, such as displaying a confirmation message.
+    navigate("/cart-page");
   };
 
   return (
@@ -80,7 +87,7 @@ const ProductDisplay = ({ item }) => {
           <i className="icofont-star"></i>
           <i className="icofont-star"></i>
           <i className="icofont-star"></i>
-          (3 review)
+          {` (${reviews?.length || 0} Reviews)`}
         </p>
         <h4>${price}</h4>
         <h6>{seller}</h6>
@@ -88,59 +95,56 @@ const ProductDisplay = ({ item }) => {
       </div>
       {/* Single Product Cart Component here */}
       <div>
-      <form onSubmit={handleSubmit}>
-      <div className="select-product size">
-        <select value={size} onChange={handleSizeChange}>
-          <option>Select Size</option>
-          <option>SM</option>
-          <option>MD</option>
-          <option>LG</option>
-          <option>XL</option>
-          <option>XXL</option>
-        </select>
-        <i className="icofont-rounded-down"></i>
-      </div>
-      <div className="select-product color">
-        <select value={color} onChange={handleColorChange}>
-          <option>Select Color</option>
-          <option>Pink</option>
-          <option>Ash</option>
-          <option>Red</option>
-          <option>White</option>
-          <option>Blue</option>
-        </select>
-        <i className="icofont-rounded-down"></i>
-      </div>
-      <div className="cart-plus-minus">
-        <div onClick={handleDecrease} className="dec qtybutton">
-          -
-        </div>
-        <input
-          className="cart-plus-minus-box"
-          type="text"
-          name="qtybutton"
-          value={prequantity}
-          onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
-        />
-        <div className="inc qtybutton" onClick={handleIncrease}>
-          +
-        </div>
-      </div>
-      <div className="discount-code mb-2">
-        <input
-          type="text"
-          placeholder="Enter Discount Code"
-          onChange={(e) => setCoupon(e.target.value)}
-        />
-      </div>
-      <button type="submit" className="lab-btn">
-        <span>Add To Cart</span>
-      </button>
+        <form onSubmit={handleSubmit}>
+          <div className="select-product size">
+            {/* <select value={size} onChange={handleSizeChange}>
+              <option>Select Size</option>
+              <option>SM</option>
+              <option>MD</option>
+              <option>LG</option>
+              <option>XL</option>
+              <option>XXL</option>
+            </select> */}
+            {/* <i className="icofont-rounded-down"></i> */}
+          </div>
+          <div className="select-product color">
+            {/* <select value={color} onChange={handleColorChange}>
+              <option>Select Color</option>
+              <option>Pink</option>
+              <option>Ash</option>
+              <option>Red</option>
+              <option>White</option>
+              <option>Blue</option>
+            </select>
+            <i className="icofont-rounded-down"></i> */}
+          </div>
+          <div className="cart-plus-minus">
+            <div onClick={handleDecrease} className="dec qtybutton">
+              -
+            </div>
+            <input
+              className="cart-plus-minus-box"
+              type="text"
+              name="qtybutton"
+              value={prequantity}
+              onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+            />
+            <div className="inc qtybutton" onClick={handleIncrease}>
+              +
+            </div>
+          </div>
+          <div className="discount-code">
+            {/* <input
+              type="text"
+              placeholder="Enter Discount Code"
+              onChange={(e) => setCoupon(e.target.value)}
+            /> */}
+          </div>
 
-      <Link to="/cart-page" className="lab-btn bg-primary">
-        <span>Check Out</span>
-      </Link>
-    </form>
+          <button type="submit" className="lab-btn">
+            <span>Add To Cart</span>
+          </button>
+        </form>
       </div>
     </div>
   );

@@ -3,9 +3,13 @@ import PageHeader from "../../components/PageHeader";
 import { Link } from "react-router-dom";
 import delImgUrl from "../../assets/images/shop/del.png";
 import CheckoutPage from "./CheckoutPage";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [discount, setDiscount] = useState(0);
+
+  const itemCount = cartItems.length;
 
   useEffect(() => {
     // Fetch cart items from local storage
@@ -21,35 +25,32 @@ const CartPage = () => {
   // Handle quantity increase
   const handleIncrease = (item) => {
     item.quantity += 1;
-    setCartItems([...cartItems]);
+    const updatedCart = [...cartItems];
+    setCartItems(updatedCart);
     // Update local storage with the new cart items
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   // Handle quantity decrease
   const handleDecrease = (item) => {
     if (item.quantity > 1) {
       item.quantity -= 1;
-      setCartItems([...cartItems]);
-
-      // Update local storage with the new cart items
-      localStorage.setItem("cart", JSON.stringify(cartItems));
+      const updatedCart = [...cartItems];
+      setCartItems(updatedCart);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
   };
 
   // Handle item removal
   const handleRemoveItem = (item) => {
-    // Filter out the item to be removed
     const updatedCart = cartItems.filter((cartItem) => cartItem.id !== item.id);
-    // Update the state with the new cart
     setCartItems(updatedCart);
-    // Update local storage with the updated cart
-    updateLocalStorage(updatedCart);
-  };
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
 
-  // Update local storage with the cart items
-  const updateLocalStorage = (cart) => {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    // Reset discount if cart becomes empty
+    if (updatedCart.length === 0) {
+      setDiscount(0);
+    }
   };
 
   // Calculate the cart subtotal
@@ -57,8 +58,34 @@ const CartPage = () => {
     return total + calculateTotalPrice(item);
   }, 0);
 
-  // Calculate the order total
-  const orderTotal = cartSubtotal;
+  const applyCoupon = (e) => {
+    e.preventDefault();
+    const code = e.target.coupon.value.trim().toUpperCase();
+
+    if (!code) return;
+
+    if (code === "SHOP10") {
+      setDiscount(10);
+      toast.success("10% Discount Applied! 🎉");
+    } else if (code === "SHOP20") {
+      setDiscount(20);
+      toast.success("20% Discount Applied! 🎉");
+    } else if (code === "SHOP50") {
+      setDiscount(50);
+      toast.success("50% Discount Applied! 🎉");
+    } else {
+      setDiscount(0);
+      toast.error("Invalid Coupon Code ❌");
+    }
+
+    e.target.coupon.value = "";
+  };
+
+  const discountAmount = (cartSubtotal * discount) / 100;
+
+  const finalTotal = cartSubtotal - discountAmount;
+
+  const isCartEmpty = cartItems.length === 0;
 
   return (
     <div>
@@ -75,7 +102,7 @@ const CartPage = () => {
                     <th className="cat-price">Price</th>
                     <th className="cat-quantity">Quantity</th>
                     <th className="cat-toprice">Total</th>
-                    <th className="cat-edit">Edit</th>
+                    <th className="cat-edit">Remove</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -83,13 +110,9 @@ const CartPage = () => {
                     <tr key={indx}>
                       <td className="product-item cat-product">
                         <div className="p-thumb">
-                          <Link to="/shop-single">
-                            <img src={`${item.img}`} alt="" />
-                          </Link>
+                          <img src={`${item.img}`} alt={item.name} />
                         </div>
-                        <div className="p-content">
-                          <Link to="/shop-single">{item.name}</Link>
-                        </div>
+                        <div className="p-content">{item.name}</div>
                       </td>
                       <td className="cat-price">${item.price}</td>
                       <td className="cat-quantity">
@@ -105,6 +128,7 @@ const CartPage = () => {
                             type="text"
                             name="qtybutton"
                             value={item.quantity}
+                            readOnly
                           />
                           <div
                             className="inc qtybutton"
@@ -118,12 +142,23 @@ const CartPage = () => {
                         ${calculateTotalPrice(item)}
                       </td>
                       <td className="cat-edit">
-                        <a href="#" onClick={() => handleRemoveItem(item)}>
-                          <img src={delImgUrl} alt="" />
-                        </a>
+                        <button
+                          onClick={() => handleRemoveItem(item)}
+                          className="btn btn-link p-0 border-0"
+                        >
+                          <img src={delImgUrl} alt="delete" />
+                        </button>
                       </td>
                     </tr>
                   ))}
+
+                  {isCartEmpty && (
+                    <tr>
+                      <td colSpan="5" className="text-center py-5">
+                        <h4>Your cart is empty 🛒</h4>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -131,21 +166,38 @@ const CartPage = () => {
             {/* cart bottom */}
             <div className="cart-bottom">
               {/* checkout box */}
-              <div className="cart-checkout-box">
-                <form className="coupon" action="/">
+              <div
+                className={`cart-checkout-box ${
+                  isCartEmpty ? "disabled-area" : ""
+                }`}
+              >
+                <form className="coupon" onSubmit={applyCoupon}>
                   <input
                     type="text"
                     name="coupon"
                     placeholder="Coupon Code..."
                     className="cart-page-input-text"
+                    disabled={isCartEmpty}
                   />
-                  <input type="submit" value="Apply Coupon" />
+                  <input
+                    type="submit"
+                    value="Apply Coupon"
+                    disabled={isCartEmpty}
+                    style={{ opacity: isCartEmpty ? 0.5 : 1 }}
+                  />
                 </form>
-                <form className="cart-checkout" action="/">
-                  <input type="submit" value="Update Cart" />
-                  {/* <Link to="/check-out"><input type="submit" value="Proceed to Checkout" /></Link> */}
+                <form className="cart-checkout">
+                  {/* <input type="submit" value="Update Cart" /> */}
+                  <Link to="/shop">
+                    <input type="submit" value="Update Cart" />
+                  </Link>
                   <div>
-                    <CheckoutPage />
+                    <CheckoutPage
+                      isCartEmpty={isCartEmpty}
+                      cartTotal={finalTotal}
+                      itemCount={itemCount}
+                      cartItems={cartItems}
+                    />
                   </div>
                 </form>
               </div>
@@ -154,42 +206,6 @@ const CartPage = () => {
               <div className="shiping-box">
                 <div className="row">
                   {/* shipping  */}
-                  <div className="col-md-6 col-12">
-                    <div className="calculate-shiping">
-                      <h3>Calculate Shipping</h3>
-                      <div className="outline-select">
-                        <select>
-                          <option value="volvo">United Kingdom (UK)</option>
-                          <option value="saab">Bangladesh</option>
-                          <option value="saab">Pakisthan</option>
-                          <option value="saab">India</option>
-                          <option value="saab">Nepal</option>
-                        </select>
-                        <span className="select-icon">
-                          <i className="icofont-rounded-down"></i>
-                        </span>
-                      </div>
-                      <div className="outline-select shipping-select">
-                        <select>
-                          <option value="volvo">State/Country</option>
-                          <option value="saab">Dhaka</option>
-                          <option value="saab">Benkok</option>
-                          <option value="saab">Kolkata</option>
-                          <option value="saab">Kapasia</option>
-                        </select>
-                        <span className="select-icon">
-                          <i className="icofont-rounded-down"></i>
-                        </span>
-                      </div>
-                      <input
-                        type="text"
-                        name="coupon"
-                        placeholder="Postcode/ZIP"
-                        className="cart-page-input-text"
-                      />
-                      <button type="submit">Update Total</button>
-                    </div>
-                  </div>
 
                   {/* cart total */}
                   <div className="col-md-6 col-12">
@@ -198,19 +214,21 @@ const CartPage = () => {
                       <ul className="lab-ul">
                         <li>
                           <span className="pull-left">Cart Subtotal</span>
-                          <p className="pull-right">$ {cartSubtotal}</p>
+                          <p className="pull-right">
+                            ${cartSubtotal.toFixed(2)}
+                          </p>
                         </li>
                         <li>
                           <span className="pull-left">
-                            Shipping and Handling
+                            Discount ({discount}%)
                           </span>
-                          <p className="pull-right">Free Shipping</p>
+                          <p className="pull-right">
+                            - ${discountAmount.toFixed(2)}
+                          </p>
                         </li>
                         <li>
                           <span className="pull-left">Order Total</span>
-                          <p className="pull-right">
-                            $ {orderTotal.toFixed(2)}
-                          </p>
+                          <p className="pull-right">${finalTotal.toFixed(2)}</p>
                         </li>
                       </ul>
                     </div>

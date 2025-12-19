@@ -3,226 +3,220 @@ import "../../components/modal.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const CheckoutPage = () => {
+const CheckoutPage = ({
+  isCartEmpty,
+  cartTotal = 0,
+  itemCount = 0,
+  cartItems,
+}) => {
   const [show, setShow] = useState(false);
-  const [activeTab, setActiveTab] = useState("visa"); // Initial active tab
+  const [activeTab, setActiveTab] = useState("visa");
 
-  const handleTabChange = (tabId) => {
-    setActiveTab(tabId);
-  };
+  const [cardName, setCardName] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expDate, setExpDate] = useState("");
+  const [cvv, setCvv] = useState("");
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [paypalEmail, setPaypalEmail] = useState("");
+  const [paypalName, setPaypalName] = useState("");
 
-  // order confirmation and redirect to home page
-  const location = useLocation();
   const navigate = useNavigate();
-
+  const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+  const handleClose = () => setShow(false);
+
+  const displayedTotal = cartTotal;
+  const displayedItems = itemCount;
+
   const handleOrderConfirm = () => {
-      alert("Your order placed successfully!")
-      localStorage.removeItem("cart");
-      navigate(from, { replace: true });
-  }
+    // VALIDATION
+    if (activeTab === "visa") {
+      if (!cardName || !cardNumber || !expDate || !cvv) {
+        toast.error("Please fill all card details ❌");
+        return;
+      }
+    } else {
+      if (!paypalEmail || !paypalName) {
+        toast.error("Please fill PayPal details ❌");
+        return;
+      }
+    }
+
+    // GET CART
+    const cart = cartItems;
+
+    // CREATE ORDER
+    const newOrder = {
+      id: Date.now(),
+      items: cart,
+      amount: cart.reduce((t, i) => t + i.price * i.quantity, 0),
+      date: new Date().toLocaleString(),
+      paymentMethod: activeTab === "visa" ? "Credit Card" : "PayPal",
+    };
+
+    // SAVE ORDER IN LOCALSTORAGE
+    const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    existingOrders.push(newOrder);
+    localStorage.setItem("orders", JSON.stringify(existingOrders));
+
+    // SUCCESS TOAST
+    toast.success("Your order has been placed successfully! 🎉");
+
+    // CLEAR CART
+    localStorage.removeItem("cart");
+
+    // CLOSE MODAL
+    handleClose();
+
+    // REDIRECT
+    setTimeout(() => {
+      navigate("/order-history", { replace: true });
+    }, 300);
+  };
 
   return (
     <div className="modalCard">
-      <Button variant="primary" onClick={handleShow} className="py-2">
+      <Button
+        variant="primary"
+        onClick={() => setShow(true)}
+        disabled={isCartEmpty}
+        className="py-2"
+        style={{ opacity: isCartEmpty ? 0.5 : 1 }}
+      >
         Proceed to Checkout
       </Button>
 
-      <Modal
-        show={show}
-        onHide={handleClose}
-        animation={false}
-        className="modal fade"
-        centered
-      >
-        <div className="modal-dialog">
-          <h5 className="px-3 mb-3">Select Your Payment Method</h5>
-          <div className="modal-content">
-            <div className="modal-body">
-              <div className="tabs mt-3">
-                <ul className="nav nav-tabs" id="myTab" role="tablist">
-                  <li className="nav-item" role="presentation">
-                    <a
-                      className={`nav-link ${
-                        activeTab === "visa" ? "active" : ""
-                      }`}
-                      id="visa-tab"
-                      data-toggle="tab"
-                      href="#visa"
-                      role="tab"
-                      aria-controls="visa"
-                      aria-selected={activeTab === "visa"}
-                      onClick={() => handleTabChange("visa")}
-                    >
-                      <img src="https://i.imgur.com/sB4jftM.png" width="80" />
-                    </a>
-                  </li>
-                  <li className="nav-item" role="presentation">
-                    <a
-                      className={`nav-link ${
-                        activeTab === "paypal" ? "active" : ""
-                      }`}
-                      id="paypal-tab"
-                      data-toggle="tab"
-                      href="#paypal"
-                      role="tab"
-                      aria-controls="paypal"
-                      aria-selected={activeTab === "paypal"}
-                      onClick={() => handleTabChange("paypal")}
-                    >
-                      <img src="https://i.imgur.com/yK7EDD1.png" width="80" />
-                    </a>
-                  </li>
-                </ul>
-                <div className="tab-content" id="myTabContent">
-                  {/* visa content */}
-                  <div
-                    className={`tab-pane fade ${
-                      activeTab === "visa" ? "show active" : ""
-                    }`}
-                    id="visa"
-                    role="tabpanel"
-                    aria-labelledby="visa-tab"
-                  >
-                    {/* Visa tab content */}
-                    <div className="mt-4 mx-4">
-                      <div className="text-center">
-                        <h5>Credit card</h5>
-                      </div>
-                      <div className="form mt-3">
-                        <div className="inputbox">
-                          <input
-                            type="text"
-                            name="name"
-                            className="form-control"
-                            required="required"
-                          />
-                          <span>Cardholder Name</span>
-                        </div>
-                        <div className="inputbox">
-                          <input
-                            type="text"
-                            name="name"
-                            min="1"
-                            max="999"
-                            className="form-control"
-                            required="required"
-                          />
-                          <span>Card Number</span> <i className="fa fa-eye"></i>
-                        </div>
-                        <div className="d-flex flex-row">
-                          <div className="inputbox">
-                            <input
-                              type="text"
-                              name="name"
-                              min="1"
-                              max="999"
-                              className="form-control"
-                              required="required"
-                            />
-                            <span>Expiration Date</span>
-                          </div>
-                          <div className="inputbox">
-                            <input
-                              type="text"
-                              name="name"
-                              min="1"
-                              max="999"
-                              className="form-control"
-                              required="required"
-                            />
-                            <span>CVV</span>
-                          </div>
-                        </div>
-                        <div className="px-5 pay">
-                          <button className="btn btn-success btn-block" onClick={handleOrderConfirm}>
-                            Add card
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* paypal content */}
-                  <div
-                    className={`tab-pane fade ${
-                      activeTab === "paypal" ? "show active" : ""
-                    }`}
-                    id="paypal"
-                    role="tabpanel"
-                    aria-labelledby="paypal-tab"
-                  >
-                    {/* Paypal tab content */}
-                    <div className="mx-4 mt-4">
-                      <div className="text-center">
-                        <h5>Paypal Account Info</h5>
-                      </div>
-                      <div className="form mt-3">
-                        <div className="inputbox">
-                          <input
-                            type="text"
-                            name="name"
-                            className="form-control"
-                            required="required"
-                          />
-                          <span>Enter your email</span>
-                        </div>
-                        <div className="inputbox">
-                          <input
-                            type="text"
-                            name="name"
-                            min="1"
-                            max="999"
-                            className="form-control"
-                            required="required"
-                          />
-                          <span>Your Name</span>
-                        </div>
-                        <div className="d-flex flex-row">
-                          <div className="inputbox">
-                            <input
-                              type="text"
-                              name="name"
-                              min="1"
-                              max="999"
-                              className="form-control"
-                              required="required"
-                            />
-                            <span>Extra Info</span>
-                          </div>
-                          <div className="inputbox">
-                            <input
-                              type="text"
-                              name="name"
-                              min="1"
-                              max="999"
-                              className="form-control"
-                              required="required"
-                            />
-                            <span></span>
-                          </div>
-                        </div>
-                        <div className="pay px-5">
-                          <button className="btn btn-primary btn-block" onClick={handleOrderConfirm}>
-                            Add paypal
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* payment desclaimer */}
-              <p className="mt-3 px-4 p-Disclaimer">
-              <em>Payment Disclaimer:</em> In no event shall payment or partial payment by Owner for any material or service
-              </p>
-            </div>
+      <Modal show={show} onHide={() => setShow(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Checkout</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          {/* Order Summary */}
+          <div
+            className="order-summary p-3 mb-3"
+            style={{ background: "#f8f9fa", borderRadius: "8px" }}
+          >
+            <h5 className="mb-2">Order Summary</h5>
+            <p>
+              Items: <strong>{itemCount}</strong>
+            </p>
+            <p>
+              Total Amount: <strong>${cartTotal.toFixed(2)}</strong>
+            </p>
           </div>
-        </div>
+
+          {/* Tabs */}
+          <ul className="nav nav-tabs mb-3">
+            <li className="nav-item">
+              <button
+                className={`nav-link ${activeTab === "visa" ? "active" : ""}`}
+                onClick={() => setActiveTab("visa")}
+              >
+                Credit / Debit Card
+              </button>
+            </li>
+
+            <li className="nav-item">
+              <button
+                className={`nav-link ${activeTab === "paypal" ? "active" : ""}`}
+                onClick={() => setActiveTab("paypal")}
+              >
+                PayPal
+              </button>
+            </li>
+          </ul>
+
+          {/* Visa Form */}
+          {activeTab === "visa" && (
+            <div>
+              <h6 className="mb-3">Card Details</h6>
+
+              <div className="inputbox">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Cardholder Name"
+                  value={cardName}
+                  onChange={(e) => setCardName(e.target.value)}
+                />
+              </div>
+
+              <div className="inputbox mt-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Card Number"
+                  maxLength={16}
+                  value={cardNumber}
+                  onChange={(e) => setCardNumber(e.target.value)}
+                />
+              </div>
+
+              <div className="d-flex gap-2 mt-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="MM/YY"
+                  value={expDate}
+                  onChange={(e) => setExpDate(e.target.value)}
+                />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="CVV"
+                  maxLength={4}
+                  value={cvv}
+                  onChange={(e) => setCvv(e.target.value)}
+                />
+              </div>
+
+              <button
+                className="btn btn-success w-100 mt-3"
+                onClick={handleOrderConfirm}
+              >
+                Pay ${cartTotal.toFixed(2)}
+              </button>
+            </div>
+          )}
+
+          {/* PayPal Form */}
+          {activeTab === "paypal" && (
+            <div>
+              <h6 className="mb-3">PayPal Information</h6>
+
+              <input
+                type="email"
+                className="form-control"
+                placeholder="PayPal Email"
+                value={paypalEmail}
+                onChange={(e) => setPaypalEmail(e.target.value)}
+              />
+
+              <input
+                type="text"
+                className="form-control mt-2"
+                placeholder="Account Name"
+                value={paypalName}
+                onChange={(e) => setPaypalName(e.target.value)}
+              />
+
+              <button
+                className="btn btn-primary w-100 mt-3"
+                onClick={handleOrderConfirm}
+              >
+                Pay with PayPal
+              </button>
+            </div>
+          )}
+        </Modal.Body>
+
+        <p className="text-center text-muted small m-0 pb-3">
+          * Your payment is 100% secure and encrypted.
+        </p>
       </Modal>
     </div>
   );

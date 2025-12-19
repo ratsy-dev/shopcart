@@ -185,13 +185,13 @@ const SingleBlog = () => {
                                 <div className="tags-section">
                                   <ul className="tags lab-ul">
                                     <li>
-                                      <a href="#">Shopping</a>
+                                      <a>Shopping</a>
                                     </li>
                                     <li>
-                                      <a href="#">Business</a>
+                                      <a>Business</a>
                                     </li>
                                     <li>
-                                      <a href="#">Personal</a>
+                                      <a>Personal</a>
                                     </li>
                                   </ul>
                                   <ul className="lab-ul social-icons">

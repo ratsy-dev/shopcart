@@ -37,25 +37,27 @@ const NavItems = () => {
       }`}
     >
       {/* ------ header top: first div ----- */}
-      <div
-        style={{
-          background: "#fdfdfd73",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-        }}
-        className={`header-top d-md-none ${socialToggle ? "open" : ""}`}
-      >
-        <div className="container">
-          <div className="header-top-area">
-            <Link to="/sign-up" className="lab-btn me-3">
-              <span>Create Account</span>
-            </Link>
-            <Link className="fw-bold" to="/login">
-              Log In
-            </Link>
+      {!user && (
+        <div
+          style={{
+            background: "#fdfdfd73",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+          }}
+          className={`header-top d-md-none ${socialToggle ? "open" : ""}`}
+        >
+          <div className="container">
+            <div className="header-top-area">
+              <Link to="/sign-up" className="lab-btn me-3">
+                <span>Create Account</span>
+              </Link>
+              <Link className="fw-bold" to="/login">
+                Log In
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* header top ends*/}
 
@@ -117,17 +119,15 @@ const NavItems = () => {
                     )}
                   </div>
                   <NavDropdown id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1" onClick={handleLogout}>
+                    <NavDropdown.Item href="#" onClick={handleLogout}>
                       Logout
                     </NavDropdown.Item>
                     <NavDropdown.Item href="/cart-page">
                       Shopping Cart
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">
-                      Profile
+                    <NavDropdown.Item href="/order-history">
+                      Order History
                     </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="/cart-page">Order</NavDropdown.Item>
                   </NavDropdown>
                 </>
               ) : (

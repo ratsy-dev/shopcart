@@ -23,10 +23,12 @@ import About from "./pages/AboutPage/About.jsx";
 import Contact from "./pages/ContactPage/Contact.jsx";
 import CartPage from "./pages/Shop/CartPage.jsx";
 import CheckoutPage from "./pages/Shop/CheckoutPage.jsx";
+import OrdersPage from "./pages/Shop/Orders.jsx";
 import Signup from "./components/Signup.jsx";
 import Login from "./components/Login.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
+import PublicRoute from "./PublicRoute/PublicRoute.jsx";
 import AuthProvider from "./contexts/AuthProvider.jsx";
 
 const router = createBrowserRouter([
@@ -65,17 +67,26 @@ const router = createBrowserRouter([
       },
       {
         path: "/sign-up",
-        element: <Signup />,
+        element: (
+          <PublicRoute>
+            <Signup />
+          </PublicRoute>
+        ),
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        ),
       },
       {
         element: <PrivateRoute />,
         children: [
           { path: "/cart-page", element: <CartPage /> },
           { path: "/check-out", element: <CheckoutPage /> },
+          { path: "/order-history", element: <OrdersPage /> },
         ],
       },
     ],

@@ -1,40 +1,93 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+
 import Rating from "./Sidebar/rating";
+import { toast } from "react-toastify";
+import { AuthContext } from "../contexts/AuthProvider";
 
 const reviwtitle = "Add a Review";
+
 let ReviewList = [
   {
     imgUrl: "/src/assets/images/instructor/01.jpg",
     imgAlt: "Client thumb",
     name: "Ganelon Boileau",
-    date: "Posted on Jun 10, 2022 at 6:57 am",
-    desc: "Enthusiast build innovativ initiatives before lonterm high-impact awesome theme seo psd porta monetize covalent leadership after without resource.",
+    date: "Posted on Jun 20, 2025 at 20:57 pm",
+    desc: "Enthusiast build innovative initiatives before longterm high-impact themes.",
+    rating: 4,
   },
   {
     imgUrl: "/src/assets/images/instructor/02.jpg",
     imgAlt: "Client thumb",
     name: "Morgana Cailot",
-    date: "Posted on Jun 10, 2022 at 6:57 am",
-    desc: "Enthusiast build innovativ initiatives before lonterm high-impact awesome theme seo psd porta monetize covalent leadership after without resource.",
-  },
-  {
-    imgUrl: "/src/assets/images/instructor/03.jpg",
-    imgAlt: "Client thumb",
-    name: "Telford Bois",
-    date: "Posted on Jun 10, 2022 at 6:57 am",
-    desc: "Enthusiast build innovativ initiatives before lonterm high-impact awesome theme seo psd porta monetize covalent leadership after without resource.",
-  },
-  {
-    imgUrl: "/src/assets/images/instructor/04.jpg",
-    imgAlt: "Client thumb",
-    name: "Cher Daviau",
-    date: "Posted on Jun 10, 2022 at 6:57 am",
-    desc: "Enthusiast build innovativ initiatives before lonterm high-impact awesome theme seo psd porta monetize covalent leadership after without resource.",
+    date: "Posted on Jun 15, 2025 at 9:00 am",
+    desc: "Innovative initiatives before longterm high-impact awesome theme SEO.",
+    rating: 5,
   },
 ];
 
 const Review = () => {
+  const { user } = useContext(AuthContext);
   const [reviewShow, setReviewShow] = useState(true);
+  const [reviews, setReviews] = useState(ReviewList);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+    rating: 5,
+  });
+
+  // Load reviews from local storage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem("reviews");
+    if (stored) {
+      setReviews(JSON.parse(stored));
+    } else {
+      setReviews(ReviewList);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+  }, [reviews]);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error("All fields are required ❌");
+      return;
+    }
+
+    const newReview = {
+      imgUrl: "/src/assets/images/instructor/03.jpg",
+      imgAlt: "Client thumb",
+      name: formData.name,
+      date: new Date().toLocaleString(),
+      desc: formData.message,
+      rating: formData.rating,
+    };
+
+    setReviews([newReview, ...reviews]);
+
+    toast.success("Review added successfully 🎉");
+
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+      rating: 5,
+    });
+  };
+
   return (
     <>
       {" "}
@@ -47,10 +100,9 @@ const Review = () => {
           Description
         </li>
         <li onClick={() => setReviewShow(!reviewShow)} className="rev">
-          Reviews 4
+          Reviews {reviews.length}
         </li>
       </ul>
-      
       <div
         className={`review-content ${
           reviewShow ? "review-content-show" : "description-show"
@@ -58,7 +110,7 @@ const Review = () => {
       >
         <div className="review-showing">
           <ul className="content lab-ul">
-            {ReviewList.map((review, i) => (
+            {reviews.map((review, i) => (
               <li key={i}>
                 <div className="post-thumb">
                   <img src={`${review.imgUrl}`} alt={`${review.imgAlt}`} />
@@ -69,7 +121,7 @@ const Review = () => {
                       <a href="#">{review.name}</a>
                       <p>{review.date}</p>
                     </div>
-                    <Rating />
+                    <Rating value={review.rating} />
                   </div>
                   <div className="entry-content">
                     <p>{review.desc}</p>
@@ -78,40 +130,77 @@ const Review = () => {
               </li>
             ))}
           </ul>
-          <div className="client-review">
-            <div className="review-form">
-              <div className="review-title">
-                <h5>{reviwtitle}</h5>
-              </div>
-              <form action="action" className="row">
-                <div className="col-md-4 col-12">
-                  <input type="text" name="name" placeholder="Full Name *" />
+          {user ? (
+            <div className="client-review">
+              <div className="review-form">
+                <div className="review-title">
+                  <h5>{reviwtitle}</h5>
                 </div>
-                <div className="col-md-4 col-12">
-                  <input type="text" name="email" placeholder="Your Email *" />
-                </div>
-                <div className="col-md-4 col-12">
-                  <div className="rating">
-                    <span className="rating-title">Your Rating : </span>
-                    <Rating />
+                <form action="action" className="row" onSubmit={handleSubmit}>
+                  <div className="col-md-4 col-12">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Full Name *"
+                      value={formData.name}
+                      onChange={handleChange}
+                    />
                   </div>
-                </div>
-                <div className="col-md-12 col-12">
-                  <textarea
-                    rows="8"
-                    type="text"
-                    name="message"
-                    placeholder="Type Here Message"
-                  ></textarea>
-                </div>
-                <div className="col-12">
-                  <button className="default-button" type="submit">
-                    <span>Submit Review</span>
-                  </button>
-                </div>
-              </form>
+                  <div className="col-md-4 col-12">
+                    <input
+                      type="text"
+                      name="email"
+                      placeholder="Your Email *"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="col-md-4 col-12">
+                    <div className="rating">
+                      <span className="rating-title">Your Rating : </span>
+                      <select
+                        name="rating"
+                        value={formData.rating}
+                        onChange={handleChange}
+                        style={{
+                          padding: "5px",
+                          borderRadius: "6px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="1">⭐</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-md-12 col-12">
+                    <textarea
+                      rows="8"
+                      name="message"
+                      placeholder="Type Here Message"
+                      value={formData.message}
+                      onChange={handleChange}
+                    ></textarea>
+                  </div>
+                  <div className="col-12">
+                    <button className="default-button">
+                      <span>Submit Review</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div style={{ padding: "5rem 0" }} className="text-center">
+              <p className="text-danger fw-bold">Login to add a review 🔒</p>
+              <Link to="/login" className="lab-btn">
+                <span>Login Now</span>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="description">
           <p>
@@ -125,7 +214,7 @@ const Review = () => {
           </p>
           <div className="post-item">
             <div className="post-thumb">
-              <img src="/src/assets/images/shop/01.jpg" alt="shop" />
+              {/* <img src="/src/assets/images/shop/01.jpg" alt="shop" /> */}
             </div>
             <div className="post-content">
               <ul className="lab-ul">

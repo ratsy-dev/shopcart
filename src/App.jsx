@@ -5,8 +5,20 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "./components/Loader";
+import { useContext } from "react";
+import { AuthContext } from "./contexts/AuthProvider";
 
 function App() {
+  const { loading } = useContext(AuthContext);
+
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
   return (
     <>
       <ScrollToTop />
