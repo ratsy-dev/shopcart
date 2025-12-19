@@ -33,6 +33,13 @@
   color: #fff;
 }
 
+.active-tab {
+  background-color: #f58d2c;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 6px;
+}
+
 /* Mobile only adjustment (screens < 768px) */
 @media (max-width: 767px) {
   .login-section,
