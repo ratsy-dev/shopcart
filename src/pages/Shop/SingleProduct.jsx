@@ -14,16 +14,17 @@ import { Autoplay } from "swiper/modules";
 import Review from "../../components/Review";
 import MostPopularPost from "../../components/Sidebar/MostPopularPost";
 import ProductDisplay from "./ProductDisplay";
+import productsData from "../../products.json";
 const reviwtitle = "Add a Review";
 
 const SingleProduct = () => {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState(productsData);
   const { id } = useParams();
-  useEffect(() => {
-    fetch("/src/products.json")
-      .then((res) => res.json())
-      .then((data) => setProduct(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/src/products.json")
+  //     .then((res) => res.json())
+  //     .then((data) => setProduct(data));
+  // }, []);
 
   const result = product.filter((p) => p.id === id);
   return (
