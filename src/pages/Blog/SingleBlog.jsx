@@ -6,8 +6,8 @@ import { useParams } from "react-router-dom";
 import blogList from "../../utilis/blogdata";
 import MostPopularPost from "../../components/Sidebar/MostPopularPost";
 import { Link } from "react-router-dom";
-import img1 from "../assets/images/blog/single/01.jpg";
-import img2 from "../assets/images/blog/single/02.jpg";
+import img1 from "../../assets/images/blog/single/01.jpg";
+import img2 from "../../assets/images/blog/single/02.jpg";
 
 const socialList = [
   {

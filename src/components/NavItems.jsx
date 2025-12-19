@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/images/logo/logo.png";
 import { AuthContext } from "../contexts/AuthProvider";
 import { NavDropdown } from "react-bootstrap";
-import img1 from "../assets/images/author/01.jpg";
+import img1 from "../../assets/images/author/01.jpg";
 
 const NavItems = () => {
   const [menuToggle, setMenuToggle] = useState(false);
