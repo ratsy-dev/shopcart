@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
+import img1 from "../../assets/images/clients/avater.jpg";
 
 const title = (
   <h2 className="title">
@@ -13,37 +14,37 @@ const desc =
 
 const clientsList = [
   {
-    imgUrl: "/src/assets/images/clients/avater.jpg",
+    imgUrl: img1,
     imgAlt: "education thumb rajibraj91 rajibraj",
     text: "Join with Us",
   },
   {
-    imgUrl: "/src/assets/images/clients/avater.jpg",
+    imgUrl: img1,
     imgAlt: "education thumb rajibraj91 rajibraj",
     text: "Join with Us",
   },
   {
-    imgUrl: "/src/assets/images/clients/avater.jpg",
+    imgUrl: img1,
     imgAlt: "education thumb rajibraj91 rajibraj",
     text: "Join with Us",
   },
   {
-    imgUrl: "/src/assets/images/clients/avater.jpg",
+    imgUrl: img1,
     imgAlt: "education thumb rajibraj91 rajibraj",
     text: "Join with Us",
   },
   {
-    imgUrl: "/src/assets/images/clients/avater.jpg",
+    imgUrl: img1,
     imgAlt: "education thumb rajibraj91 rajibraj",
     text: "Join with Us",
   },
   {
-    imgUrl: "/src/assets/images/clients/avater.jpg",
+    imgUrl: img1,
     imgAlt: "education thumb rajibraj91 rajibraj",
     text: "Join with Us",
   },
   {
-    imgUrl: "/src/assets/images/clients/avater.jpg",
+    imgUrl: img1,
     imgAlt: "education thumb rajibraj91 rajibraj",
     text: "Join with Us",
   },
