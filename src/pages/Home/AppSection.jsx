@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import img1 from "../../assets/images/app/01.jpg";
-import img2 from "../../assets/images/app/02.jpg";
+import img1 from "../assets/images/app/01.jpg";
+import img2 from "../assets/images/app/02.jpg";
 
 const btnText = "Sign up for Free";
 const title = "Learn Anytime, Anywhere";

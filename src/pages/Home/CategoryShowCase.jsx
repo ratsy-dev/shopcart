@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Rating from "../../components/Sidebar/rating";
 import ProductData from "../../products.json";
-import img1 from "../../assets/images/shape-img/icon/01.png";
-import img2 from "../../assets/images/shape-img/icon/02.png";
+import img1 from "../assets/images/shape-img/icon/01.png";
+import img2 from "../assets/images/shape-img/icon/02.png";
 
 const title = "Our Products";
 

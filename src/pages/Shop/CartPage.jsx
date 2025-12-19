@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PageHeader from "../../components/PageHeader";
 import { Link } from "react-router-dom";
-import delImgUrl from "../../assets/images/shop/del.png";
+import delImgUrl from "../assets/images/shop/del.png";
 import CheckoutPage from "./CheckoutPage";
 import { toast } from "react-toastify";
 

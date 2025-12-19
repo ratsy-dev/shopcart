@@ -10,9 +10,9 @@ const conSubTitle = "Get in touch with Contact us";
 const conTitle =
   "Fill out the form below so we can understand your needs and assist you better.";
 const btnText = "Send our Message";
-import img1 from "../../assets/images/icon/01.png";
-import img2 from "../../assets/images/icon/02.png";
-import img3 from "../../assets/images/icon/03.png";
+import img1 from "../assets/images/icon/01.png";
+import img2 from "../assets/images/icon/02.png";
+import img3 from "../assets/images/icon/03.png";
 
 const contactList = [
   {

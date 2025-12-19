@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
-import img1 from "../../assets/images/clients/avater.jpg";
+import img1 from "../assets/images/clients/avater.jpg";
 
 const title = (
   <h2 className="title">

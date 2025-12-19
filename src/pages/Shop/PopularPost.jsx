@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
 const title = "Most Popular Post";
-import img1 from "../../assets/images/blog/10.jpg";
-import img2 from "../../assets/images/blog/11.jpg";
-import img3 from "../../assets/images/blog/12.jpg";
-import img4 from "../../assets/images/blog/09.jpg";
+import img1 from "../assets/images/blog/10.jpg";
+import img2 from "../assets/images/blog/11.jpg";
+import img3 from "../assets/images/blog/12.jpg";
+import img4 from "../assets/images/blog/09.jpg";
 
 const postList = [
   {

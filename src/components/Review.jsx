@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import Rating from "./Sidebar/rating";
 import { toast } from "react-toastify";
 import { AuthContext } from "../contexts/AuthProvider";
-import img1 from "../../assets/images/instructor/01.jpg";
-import img2 from "../../assets/images/instructor/02.jpg";
-import img3 from "../../assets/images/instructor/03.jpg";
+import img1 from "../assets/images/instructor/01.jpg";
+import img2 from "../assets/images/instructor/02.jpg";
+import img3 from "../assets/images/instructor/03.jpg";
 
 const reviwtitle = "Add a Review";
 

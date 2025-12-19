@@ -1,10 +1,10 @@
 import React from "react";
 import PageHeader from "../../components/PageHeader";
-import img1 from "../../assets/images/about/icon/01.jpg";
-import img2 from "../../assets/images/about/icon/02.jpg";
-import img3 from "../../assets/images/about/icon/03.jpg";
-import img4 from "../../assets/images/about/01.jpg";
-import img5 from "../../assets/images/about/02.jpg";
+import img1 from "../assets/images/about/icon/01.jpg";
+import img2 from "..assets/images/about/icon/02.jpg";
+import img3 from "../assets/images/about/icon/03.jpg";
+import img4 from "../assets/images/about/01.jpg";
+import img5 from "../assets/images/about/02.jpg";
 
 const subTitle = "About ShopCart";
 const title = "Your Trusted Destination for Quality Shopping";

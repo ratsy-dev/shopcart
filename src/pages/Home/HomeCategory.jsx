@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 const subTitle = "Choose Any Products";
 const title = "Shop Everything With Us";
 const btnText = "Get Started Now";
-import img1 from "src/assets/images/category/01.jpg";
-import img2 from "src/assets/images/category/02.jpg";
-import img3 from "src/assets/images/category/03.jpg";
-import img4 from "src/assets/images/category/04.jpg";
-import img5 from "src/assets/images/category/05.jpg";
-import img6 from "src/assets/images/category/06.jpg";
+import img1 from "../assets/images/category/01.jpg";
+import img2 from "../assets/images/category/02.jpg";
+import img3 from "../assets/images/category/03.jpg";
+import img4 from "../assets/images/category/04.jpg";
+import img5 from "../assets/images/category/05.jpg";
+import img6 from "../assets/images/category/06.jpg";
 
 const categoryList = [
   {
