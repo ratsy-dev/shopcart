@@ -213,7 +213,7 @@ const CartPage = () => {
                     Available Coupons:
                   </p>
 
-                  <div className="d-flex flex-column gap-2">
+                  <div className="d-flex flex-row gap-2">
                     <button
                       type="button"
                       style={{

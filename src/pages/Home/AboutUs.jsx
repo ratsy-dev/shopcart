@@ -1,5 +1,7 @@
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const subTitle = "Why Choose Us";
 const title = "Become a Merchant & Start Your Business Today";
@@ -26,6 +28,7 @@ const countList = [
 ];
 
 const AboutUs = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="instructor-section style-2 padding-tb section-bg-ash">
       <div className="container">
@@ -56,7 +59,7 @@ const AboutUs = () => {
                 <span className="subtitle">{subTitle}</span>
                 <h2 className="title">{title}</h2>
                 <p>{desc}</p>
-                <Link to="/sign-up" className="lab-btn">
+                <Link to={user ? "/merchant" : "/login"} className="lab-btn">
                   <span>{btnText}</span>
                 </Link>
               </div>

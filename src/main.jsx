@@ -22,10 +22,12 @@ import SingleBlog from "./pages/Blog/SingleBlog.jsx";
 import About from "./pages/AboutPage/About.jsx";
 import Contact from "./pages/ContactPage/Contact.jsx";
 import CartPage from "./pages/Shop/CartPage.jsx";
-import CheckoutPage from "./pages/Shop/CheckoutPage.jsx";
+// import CheckoutPage from "./pages/Shop/CheckoutPage.jsx";
 import OrdersPage from "./pages/Shop/Orders.jsx";
 import Signup from "./components/Signup.jsx";
 import Login from "./components/Login.jsx";
+import Dealership from "./pages/Dealership/Dealership.jsx";
+import Merchant from "./pages/Merchant/Merchant.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
 import PublicRoute from "./PublicRoute/PublicRoute.jsx";
@@ -85,8 +87,10 @@ const router = createBrowserRouter([
         element: <PrivateRoute />,
         children: [
           { path: "/cart-page", element: <CartPage /> },
-          { path: "/check-out", element: <CheckoutPage /> },
+          // { path: "/check-out", element: <CheckoutPage /> },
           { path: "/order-history", element: <OrdersPage /> },
+          { path: "/dealership", element: <Dealership /> },
+          { path: "/merchant", element: <Merchant /> },
         ],
       },
     ],
