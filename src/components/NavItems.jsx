@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/images/logo/logo.png";
 import { AuthContext } from "../contexts/AuthProvider";
 import { NavDropdown } from "react-bootstrap";
+import img1 from "../assets/images/author/01.jpg";
 
 const NavItems = () => {
   const [menuToggle, setMenuToggle] = useState(false);
@@ -112,10 +113,7 @@ const NavItems = () => {
                         />
                       </>
                     ) : (
-                      <img
-                        src="/src/assets/images/author/01.jpg"
-                        className="nav-profile"
-                      />
+                      <img src={img1} className="nav-profile" />
                     )}
                   </div>
                   <NavDropdown id="basic-nav-dropdown">

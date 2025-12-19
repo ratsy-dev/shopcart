@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import Rating from "./Sidebar/rating";
 import { toast } from "react-toastify";
 import { AuthContext } from "../contexts/AuthProvider";
+import img1 from "../../assets/images/instructor/01.jpg";
+import img2 from "../../assets/images/instructor/02.jpg";
+import img3 from "../../assets/images/instructor/03.jpg";
 
 const reviwtitle = "Add a Review";
 
 let DefaultReviews = [
   {
-    imgUrl: "/src/assets/images/instructor/01.jpg",
+    imgUrl: img1,
     imgAlt: "Client thumb",
     name: "Ganelon Boileau",
     date: "Posted on Jun 20, 2025 at 20:57 pm",
@@ -16,7 +19,7 @@ let DefaultReviews = [
     rating: 4,
   },
   {
-    imgUrl: "/src/assets/images/instructor/02.jpg",
+    imgUrl: img2,
     imgAlt: "Client thumb",
     name: "Morgana Cailot",
     date: "Posted on Jun 15, 2025 at 9:00 am",
@@ -72,7 +75,7 @@ const Review = () => {
     }
 
     const newReview = {
-      imgUrl: "/src/assets/images/instructor/03.jpg",
+      imgUrl: img3,
       imgAlt: "Client thumb",
       name: formData.name,
       date: new Date().toLocaleString(),
