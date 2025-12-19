@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [discount, setDiscount] = useState(0);
+  const [selectedCoupon, setSelectedCoupon] = useState("");
 
   const itemCount = cartItems.length;
 
@@ -79,6 +80,11 @@ const CartPage = () => {
     }
 
     e.target.coupon.value = "";
+  };
+
+  const selectCoupon = (code) => {
+    document.querySelector("input[name='coupon']").value = code;
+    setSelectedCoupon(code);
   };
 
   const discountAmount = (cartSubtotal * discount) / 100;
@@ -201,6 +207,82 @@ const CartPage = () => {
                   </div>
                 </form>
               </div>
+              {!isCartEmpty && (
+                <div className="m-4">
+                  <p style={{ fontWeight: 600, marginBottom: "8px" }}>
+                    Available Coupons:
+                  </p>
+
+                  <div className="d-flex flex-column gap-2">
+                    <button
+                      type="button"
+                      style={{
+                        background:
+                          selectedCoupon === "SHOP10" ? "#ffe9d6" : "#f5f5f5",
+                        border:
+                          selectedCoupon === "SHOP10"
+                            ? "2px solid #ff7a00"
+                            : "1px solid #ddd",
+                        padding: "10px 15px",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        width: "fit-content",
+                        fontWeight: 600,
+                        transition: "0.2s",
+                      }}
+                      onClick={() => selectCoupon("SHOP10")}
+                    >
+                      SHOP10 – 10% OFF
+                    </button>
+
+                    <button
+                      type="button"
+                      style={{
+                        background:
+                          selectedCoupon === "SHOP20" ? "#ffe9d6" : "#f5f5f5",
+                        border:
+                          selectedCoupon === "SHOP20"
+                            ? "2px solid #ff7a00"
+                            : "1px solid #ddd",
+                        padding: "10px 15px",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        width: "fit-content",
+                        fontWeight: 600,
+                        transition: "0.2s",
+                      }}
+                      onClick={() => selectCoupon("SHOP20")}
+                    >
+                      SHOP20 – 20% OFF
+                    </button>
+
+                    <button
+                      type="button"
+                      style={{
+                        background:
+                          selectedCoupon === "SHOP50" ? "#ffe9d6" : "#f5f5f5",
+                        border:
+                          selectedCoupon === "SHOP50"
+                            ? "2px solid #ff7a00"
+                            : "1px solid #ddd",
+                        padding: "10px 15px",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        width: "fit-content",
+                        fontWeight: 600,
+                        transition: "0.2s",
+                      }}
+                      onClick={() => selectCoupon("SHOP50")}
+                    >
+                      SHOP50 – 50% OFF
+                    </button>
+                  </div>
+
+                  <p className="text-muted mt-2" style={{ fontSize: "14px" }}>
+                    ⚠️ Only one coupon can be applied per order.
+                  </p>
+                </div>
+              )}
 
               {/* shopping box */}
               <div className="shiping-box">
