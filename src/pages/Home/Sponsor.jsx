@@ -4,14 +4,20 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
+import img1 from "../../assets/images/sponsor/01.png";
+import img2 from "../../assets/images/sponsor/02.png";
+import img3 from "../../assets/images/sponsor/03.png";
+import img4 from "../../assets/images/sponsor/04.png";
+import img5 from "../../assets/images/sponsor/05.png";
+import img6 from "../../assets/images/sponsor/06.png";
 
 const sponsorList = [
-  { imgUrl: "/src/assets/images/sponsor/01.png" },
-  { imgUrl: "/src/assets/images/sponsor/02.png" },
-  { imgUrl: "/src/assets/images/sponsor/03.png" },
-  { imgUrl: "/src/assets/images/sponsor/04.png" },
-  { imgUrl: "/src/assets/images/sponsor/05.png" },
-  { imgUrl: "/src/assets/images/sponsor/06.png" },
+  { imgUrl: img1 },
+  { imgUrl: img2 },
+  { imgUrl: img3 },
+  { imgUrl: img4 },
+  { imgUrl: img5 },
+  { imgUrl: img6 },
 ];
 
 const Sponsor = () => {
