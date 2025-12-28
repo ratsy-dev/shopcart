@@ -54,15 +54,15 @@ const ProductCards = ({ products, GridList }) => {
                 <img src={`${product.img}`} alt={`${product.imgAlt}`} />
               </div>
               <div className="product-action-link">
-                <a href="#">
+                <Link to={`/shop/${product.id}`}>
                   <i className="icofont-eye"></i>
-                </a>
-                <a href="#">
+                </Link>
+                {/* <a href="#">
                   <i className="icofont-heart"></i>
                 </a>
                 <a href="#">
                   <i className="icofont-cart-alt"></i>
-                </a>
+                </a> */}
               </div>
             </div>
             <div className="product-content">
