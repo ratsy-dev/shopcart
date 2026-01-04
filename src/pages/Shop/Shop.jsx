@@ -49,6 +49,7 @@ const Shop = () => {
     if (curcat === "All") {
       setProducts(Data);
       setSelectedCategory("All");
+      setCurrentPage(1);
       return;
     }
     const newItem = Data.filter((newVal) => {
@@ -56,6 +57,7 @@ const Shop = () => {
     });
     setSelectedCategory(curcat);
     setProducts(newItem);
+    setCurrentPage(1);
     // console.log(selectedCategory)
   };
 
@@ -70,6 +72,7 @@ const Shop = () => {
       setProducts(Data);
       setSelectedCategory("All");
     }
+    setCurrentPage(1);
   }, [selectedCategoryFromHome]);
 
   return (
